@@ -30,8 +30,10 @@ const App = () => {
 
   const addSubjectEvent = (subjectToAdd) => {
     if (!subjects[subjectToAdd.subject]) {
+      console.log("ADD SUBJECT");
       dispatch(createSubject(subjectToAdd));
     } else {
+      console.log("PATCH SUBJECT");
       dispatch(editSubject(subjectToAdd));
     }
   };

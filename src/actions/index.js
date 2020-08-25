@@ -38,6 +38,7 @@ export const createSubject = (subjectToAdd) => async (dispatch, getState) => {
 export const fetchSubjects = () => async (dispatch, getState) => {
   const { userId } = getState().auth;
   const response = await subjects.get(`/UsersSubjects/${userId}`);
+  console.log(response);
   if (response.data.Code === 201) {
     dispatch({ type: FETCH_SUBJECTS, payload: response.data.UserObjects });
   }
