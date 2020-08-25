@@ -23,7 +23,6 @@ export const signOut = () => {
 
 export const createSubject = (subjectToAdd) => async (dispatch, getState) => {
   const { userId } = getState().auth;
-  console.log("CREATE!");
   const response = await subjects.post("/UsersSubjects", {
     ...subjectToAdd,
     userId: userId,
@@ -38,7 +37,6 @@ export const createSubject = (subjectToAdd) => async (dispatch, getState) => {
 export const fetchSubjects = () => async (dispatch, getState) => {
   const { userId } = getState().auth;
   const response = await subjects.get(`/UsersSubjects/${userId}`);
-  console.log(response);
   if (response.data.Code === 201) {
     dispatch({ type: FETCH_SUBJECTS, payload: response.data.UserObjects });
   }
@@ -46,10 +44,10 @@ export const fetchSubjects = () => async (dispatch, getState) => {
 
 export const editSubject = (subject) => async (dispatch, getState) => {
   const { userId } = getState().auth;
-
   const response = await subjects.patch(
     `/UsersSubjects/${userId}/Subject/${subject.subject}`,
     {
+      userId: userId,
       timing: subject.timing,
       startTime: new Date().getTime(),
     }

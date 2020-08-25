@@ -7,7 +7,6 @@ const GifItem = ({ url, width, height, title }) => {
 
   useEffect(() => {
     if (gifRef.current) {
-      console.log(gifRef.current);
       gifRef.current.addEventListener("load", setGifSpans);
     }
     //
@@ -24,7 +23,6 @@ const GifItem = ({ url, width, height, title }) => {
       <Zoom>
         <img
           ref={(el) => {
-            console.log(el);
             gifRef.current = el;
           }}
           alt={title}

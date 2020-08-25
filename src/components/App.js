@@ -11,7 +11,7 @@ import {
   editSubject,
   fetchSubjects,
 } from "../actions";
-import { SIGN_IN, SIGN_OUT } from "../actions/types";
+import { SIGN_IN, SIGN_OUT, CLEAR_SUBJECTS } from "../actions/types";
 
 const App = () => {
   const [gifs, setGifs] = useState([]);
@@ -26,14 +26,13 @@ const App = () => {
 
   const onLogOutEvent = () => {
     dispatch({ type: SIGN_OUT });
+    dispatch({ type: CLEAR_SUBJECTS });
   };
 
   const addSubjectEvent = (subjectToAdd) => {
     if (!subjects[subjectToAdd.subject]) {
-      console.log("ADD SUBJECT");
       dispatch(createSubject(subjectToAdd));
     } else {
-      console.log("PATCH SUBJECT");
       dispatch(editSubject(subjectToAdd));
     }
   };
@@ -55,19 +54,15 @@ const App = () => {
       });
 
       socket.on("CONNECTION_SUCCESS", (data) => {
-        console.log("Connection Success");
-        console.log(socket.disconnected);
         data = JSON.parse(data);
         if (data.historyData) setGifs((gifs) => [...gifs, ...data.historyData]);
       });
 
       socket.on("disconnect", () => {
-        console.log("Connection disconnect");
         socket.close();
       });
     }
     return () => {
-      console.log("DISCONNECT!");
       socket.disconnect();
       setGifs([]);
     };

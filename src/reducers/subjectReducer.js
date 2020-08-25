@@ -3,6 +3,7 @@ import {
   FETCH_SUBJECTS,
   DELETE_SUBJECT,
   EDIT_SUBJECT,
+  CLEAR_SUBJECTS,
 } from "../actions/types";
 import _ from "lodash";
 
@@ -16,17 +17,15 @@ export default (state = {}, action) => {
         }),
         {}
       );
-      console.log("TEMP: ");
-      console.log(temp);
       return { ...state, ...temp };
-    //return { ...temp };
-    //return { ...state, [action.payload.subject]: action.payload.timing };
     case CREATE_SUBJECT:
       return { ...state, [action.payload.subject]: action.payload.timing };
     case EDIT_SUBJECT:
       return { ...state, [action.payload.subject]: action.payload.timing };
     case DELETE_SUBJECT:
       return _.omit(state, action.payload);
+    case CLEAR_SUBJECTS:
+      return {};
     default:
       return state;
   }
