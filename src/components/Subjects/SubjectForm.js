@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import { set } from "lodash";
 
 const SubjectForm = ({ addSubjectEvent, isSignedIn }) => {
   const [timing, settiming] = useState("");
