@@ -5,6 +5,7 @@ import SubjectList from "./Subjects/SubjectList";
 import GifList from "../components/Gifs/GifList";
 import socketIOClient from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
+import _ from "lodash";
 import {
   createSubject,
   deleteSubject,
@@ -42,6 +43,21 @@ const App = () => {
     setGifs(gifs.filter((subject) => subject.subject !== subjectName));
   };
 
+  /*const CheckDeletedGifs = () => {
+    gifs.forEach((gif) => {
+      if (_.keys(subjects).indexOf(gif.subject) === -1) {
+        gifs.splice(_.keys(subjects).indexOf(gif.subject), 1);
+      }
+    });
+  };*/
+
+  useEffect(() => {
+    gifs.forEach((gif) => {
+      if (_.keys(subjects).indexOf(gif.subject) === -1) {
+        gifs.splice(_.keys(subjects).indexOf(gif.subject), 1);
+      }
+    });
+  }, [subjects, gifs]);
   useEffect(() => {
     /* Local Server */
     //const socket = socketIOClient("127.0.0.1:8321");

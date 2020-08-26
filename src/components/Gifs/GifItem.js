@@ -18,6 +18,7 @@ const GifItem = ({ url, width, height, title }) => {
       setSpans(Math.ceil(height / 10) + 1);
     }
   };
+
   return (
     <div style={{ gridRowEnd: `span ${spans}` }}>
       <Zoom>
