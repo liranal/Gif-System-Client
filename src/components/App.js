@@ -43,7 +43,10 @@ const App = () => {
   };
 
   useEffect(() => {
+    /* Local Server */
     //const socket = socketIOClient("127.0.0.1:8321");
+
+    /* Cloud Server */
     const socket = socketIOClient("https://gif-system-server.herokuapp.com/");
     if (userId) {
       socket.emit("NEW_CLIENT", { userId: userId });
