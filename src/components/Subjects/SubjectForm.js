@@ -39,6 +39,7 @@ const SubjectForm = ({ addSubjectEvent, isSignedIn }) => {
                 <input
                   type="text"
                   name="Subject"
+                  value={subjectName}
                   placeholder="Subject"
                   onChange={(e) => {
                     setsubjectName(e.target.value);
@@ -49,6 +50,7 @@ const SubjectForm = ({ addSubjectEvent, isSignedIn }) => {
                 <input
                   type="text"
                   name="Timing"
+                  value={timing}
                   placeholder="Timing"
                   onChange={(e) => {
                     settiming(e.target.value);
