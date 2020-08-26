@@ -38,8 +38,8 @@ const App = () => {
   };
 
   const deleteSubjectEvent = (subjectName) => {
-    setGifs(gifs.filter((subject) => subject.subject !== subjectName));
     dispatch(deleteSubject(subjectName));
+    setGifs(gifs.filter((subject) => subject.subject !== subjectName));
   };
 
   useEffect(() => {
