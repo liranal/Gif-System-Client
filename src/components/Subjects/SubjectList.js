@@ -6,6 +6,7 @@ const SubjectList = ({ isSignedIn, subjects, deleteSubjectEvent }) => {
     if (!isSignedIn) {
       return null;
     }
+
     const deleteSubjectButton = (subjectName) => {
       deleteSubjectEvent(subjectName);
     };
