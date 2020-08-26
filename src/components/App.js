@@ -43,7 +43,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    const socket = socketIOClient("http://127.0.0.1:8321");
+    //const socket = socketIOClient("127.0.0.1:8321");
+    const socket = socketIOClient("https://gif-system-server.herokuapp.com/");
     if (userId) {
       socket.emit("NEW_CLIENT", { userId: userId });
       dispatch(fetchSubjects());
