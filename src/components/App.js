@@ -80,26 +80,28 @@ const App = () => {
     <div className="ui container" style={{ marginTop: "10px" }}>
       <div>
         <div className="ui header">
-          <div className="ui segment">
-            <LoginForm
+          <div className="ui segments">
+            <div className="ui segment">
+              <LoginForm
+                isSignedIn={isSignedIn}
+                onLogOutEvent={onLogOutEvent}
+                onLoginEvent={onLogInEvent}
+              />
+            </div>
+            <SubjectForm
               isSignedIn={isSignedIn}
-              onLogOutEvent={onLogOutEvent}
-              onLoginEvent={onLogInEvent}
+              addSubjectEvent={addSubjectEvent}
             />
           </div>
-          <SubjectForm
+          <SubjectList
+            subjects={subjects}
             isSignedIn={isSignedIn}
-            addSubjectEvent={addSubjectEvent}
+            deleteSubjectEvent={deleteSubjectEvent}
           />
         </div>
-        <SubjectList
-          subjects={subjects}
-          isSignedIn={isSignedIn}
-          deleteSubjectEvent={deleteSubjectEvent}
-        />
-      </div>
-      <div>
-        <GifList gifs={gifs} isSignedIn={isSignedIn} />
+        <div>
+          <GifList gifs={gifs} isSignedIn={isSignedIn} />
+        </div>
       </div>
     </div>
   );
