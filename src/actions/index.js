@@ -6,6 +6,10 @@ import {
   FETCH_SUBJECTS,
   DELETE_SUBJECT,
   EDIT_SUBJECT,
+  FETCH_GIF,
+  DELETE_GIFS,
+  FETCH_GIFS,
+  CLEAR_GIFS,
 } from "./types";
 
 export const signIn = (userId) => {
@@ -18,6 +22,33 @@ export const signIn = (userId) => {
 export const signOut = () => {
   return {
     type: SIGN_OUT,
+  };
+};
+
+export const fetchGif = (gif) => {
+  return {
+    type: FETCH_GIF,
+    payload: gif,
+  };
+};
+
+export const deleteGifs = (subject) => {
+  return {
+    type: DELETE_GIFS,
+    payload: subject,
+  };
+};
+
+export const fetchGifs = (gifs) => {
+  return {
+    type: FETCH_GIFS,
+    payload: gifs,
+  };
+};
+
+export const clearGifs = () => {
+  return {
+    type: CLEAR_GIFS,
   };
 };
 
@@ -65,4 +96,5 @@ export const deleteSubject = (subjectToRemove) => async (
     type: DELETE_SUBJECT,
     payload: subjectToRemove,
   });
+  dispatch(deleteGifs(subjectToRemove));
 };

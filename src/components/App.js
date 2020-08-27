@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import LoginForm from "./LoginForm";
 import SubjectForm from "./Subjects/SubjectForm";
 import SubjectList from "./Subjects/SubjectList";
@@ -11,11 +11,14 @@ import {
   deleteSubject,
   editSubject,
   fetchSubjects,
+  fetchGif,
+  fetchGifs,
+  clearGifs,
 } from "../actions";
 import { SIGN_IN, SIGN_OUT, CLEAR_SUBJECTS } from "../actions/types";
 
 const App = () => {
-  const [gifs, setGifs] = useState([]);
+  const gifs = useSelector((state) => state.gifs);
   const userId = useSelector((state) => state.auth.userId);
   const subjects = useSelector((state) => state.subjects);
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
@@ -40,17 +43,7 @@ const App = () => {
 
   const deleteSubjectEvent = (subjectName) => {
     dispatch(deleteSubject(subjectName));
-    setGifs(gifs.filter((subject) => subject.subject !== subjectName));
   };
-
-  /*const CheckDeletedGifs = () => {
-    gifs.forEach((gif) => {
-      if (_.keys(subjects).indexOf(gif.subject) === -1) {
-        gifs.splice(_.keys(subjects).indexOf(gif.subject), 1);
-      }
-    });
-  };*/
-
   useEffect(() => {
     gifs.forEach((gif) => {
       if (_.keys(subjects).indexOf(gif.subject) === -1) {
@@ -58,6 +51,7 @@ const App = () => {
       }
     });
   }, [subjects, gifs]);
+
   useEffect(() => {
     /* Local Server */
     //const socket = socketIOClient("127.0.0.1:8321");
@@ -70,12 +64,12 @@ const App = () => {
 
       socket.on("NEW_GIF", (data) => {
         data = JSON.parse(data);
-        setGifs((gifs) => [...gifs, data]);
+        dispatch(fetchGif(data));
       });
 
       socket.on("CONNECTION_SUCCESS", (data) => {
         data = JSON.parse(data);
-        if (data.historyData) setGifs((gifs) => [...gifs, ...data.historyData]);
+        if (data.historyData) dispatch(fetchGifs(data.historyData));
       });
 
       socket.on("disconnect", () => {
@@ -84,7 +78,7 @@ const App = () => {
     }
     return () => {
       socket.disconnect();
-      setGifs([]);
+      dispatch(clearGifs());
     };
   }, [userId, dispatch]);
 

@@ -6,3 +6,7 @@ export const FETCH_SUBJECT = "FETCH_SUBJECT";
 export const DELETE_SUBJECT = "DELETE_SUBJECT";
 export const EDIT_SUBJECT = "EDIT_SUBJECT";
 export const CLEAR_SUBJECTS = "CLEAR_SUBJECTS";
+export const FETCH_GIF = "FETCH_GIF";
+export const FETCH_GIFS = "FETCH_GIFS";
+export const DELETE_GIFS = "DELETE_GIFS";
+export const CLEAR_GIFS = "CLEAR_GIFS";

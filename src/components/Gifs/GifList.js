@@ -7,17 +7,19 @@ const GifList = ({ gifs, isSignedIn }) => {
     if (!isSignedIn) {
       return null;
     }
-    return gifs.map((gif, index) => {
-      return (
-        <GifItem
-          url={gif.gifUrl}
-          width={gif.width}
-          height={gif.height}
-          title={gif.title}
-          key={index}
-        />
-      );
-    });
+
+    if (gifs && gifs.length > 0)
+      return gifs.map((gif, index) => {
+        return (
+          <GifItem
+            url={gif.gifUrl}
+            width={gif.width}
+            height={gif.height}
+            title={gif.id}
+            key={index}
+          />
+        );
+      });
   };
 
   return <div className="gif-list">{renderGifList()}</div>;
