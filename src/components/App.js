@@ -79,27 +79,26 @@ const App = () => {
   return (
     <div className="ui container" style={{ marginTop: "10px" }}>
       <div>
-        <div>
-          <LoginForm
-            isSignedIn={isSignedIn}
-            onLogOutEvent={onLogOutEvent}
-            onLoginEvent={onLogInEvent}
-          />
-        </div>
-        <div>
+        <div className="ui header">
+          <div className="ui segment">
+            <LoginForm
+              isSignedIn={isSignedIn}
+              onLogOutEvent={onLogOutEvent}
+              onLoginEvent={onLogInEvent}
+            />
+          </div>
           <SubjectForm
             isSignedIn={isSignedIn}
             addSubjectEvent={addSubjectEvent}
           />
         </div>
-        <div>
-          <SubjectList
-            subjects={subjects}
-            isSignedIn={isSignedIn}
-            deleteSubjectEvent={deleteSubjectEvent}
-          />
-        </div>
-
+        <SubjectList
+          subjects={subjects}
+          isSignedIn={isSignedIn}
+          deleteSubjectEvent={deleteSubjectEvent}
+        />
+      </div>
+      <div>
         <GifList gifs={gifs} isSignedIn={isSignedIn} />
       </div>
     </div>

@@ -24,7 +24,16 @@ const SubjectList = ({ isSignedIn, subjects, deleteSubjectEvent }) => {
       });
     }
   };
-  return <div className="ui relaxed horizontal list">{renderSubjects()}</div>;
+  if (isSignedIn) {
+    return (
+      <div className="ui segment">
+        <div className="ui header">Subject List</div>
+        <div className="ui relaxed horizontal list">{renderSubjects()}</div>
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default SubjectList;

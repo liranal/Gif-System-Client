@@ -31,40 +31,42 @@ const SubjectForm = ({ addSubjectEvent, isSignedIn }) => {
       return null;
     } else {
       return (
-        <div className="ui form">
-          <div className="field">
-            <label>Subject</label>
-            <div className="two fields">
-              <div className={`field ${errorSubjectNameEmpty}`}>
-                <input
-                  type="text"
-                  name="Subject"
-                  value={subjectName}
-                  placeholder="Subject"
-                  onChange={(e) => {
-                    setsubjectName(e.target.value);
-                  }}
-                ></input>
+        <div className="ui segment">
+          <div className="ui form">
+            <div className="field">
+              <div className="ui header">Subject Form</div>
+              <div className="two fields">
+                <div className={`field ${errorSubjectNameEmpty}`}>
+                  <input
+                    type="text"
+                    name="Subject"
+                    value={subjectName}
+                    placeholder="Subject"
+                    onChange={(e) => {
+                      setsubjectName(e.target.value);
+                    }}
+                  ></input>
+                </div>
+                <div className={`field ${errorNaN} ${errorTimingEmpty}`}>
+                  <input
+                    type="text"
+                    name="Timing"
+                    value={timing}
+                    placeholder="Timing"
+                    onChange={(e) => {
+                      settiming(e.target.value);
+                    }}
+                  ></input>
+                </div>
               </div>
-              <div className={`field ${errorNaN} ${errorTimingEmpty}`}>
-                <input
-                  type="text"
-                  name="Timing"
-                  value={timing}
-                  placeholder="Timing"
-                  onChange={(e) => {
-                    settiming(e.target.value);
-                  }}
-                ></input>
-              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={addSubjectButton}
+              >
+                Add
+              </Button>
             </div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={addSubjectButton}
-            >
-              Add
-            </Button>
           </div>
         </div>
       );
