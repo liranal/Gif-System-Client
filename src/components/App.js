@@ -5,7 +5,7 @@ import SubjectList from "./Subjects/SubjectList";
 import GifList from "../components/Gifs/GifList";
 import socketIOClient from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
-import _ from "lodash";
+
 import {
   createSubject,
   deleteSubject,
@@ -14,8 +14,10 @@ import {
   fetchGif,
   fetchGifs,
   clearGifs,
+  signOut,
+  signIn,
 } from "../actions";
-import { SIGN_IN, SIGN_OUT, CLEAR_SUBJECTS } from "../actions/types";
+//import { SIGN_IN, SIGN_OUT, CLEAR_SUBJECTS } from "../actions/types";
 
 const App = () => {
   const gifs = useSelector((state) => state.gifs);
@@ -25,12 +27,11 @@ const App = () => {
   const dispatch = useDispatch();
 
   const onLogInEvent = (userName) => {
-    dispatch({ type: SIGN_IN, payload: userName });
+    dispatch(signIn(userName));
   };
 
   const onLogOutEvent = () => {
-    dispatch({ type: SIGN_OUT });
-    dispatch({ type: CLEAR_SUBJECTS });
+    dispatch(signOut());
   };
 
   const addSubjectEvent = (subjectToAdd) => {
@@ -44,13 +45,6 @@ const App = () => {
   const deleteSubjectEvent = (subjectName) => {
     dispatch(deleteSubject(subjectName));
   };
-  useEffect(() => {
-    gifs.forEach((gif) => {
-      if (_.keys(subjects).indexOf(gif.subject) === -1) {
-        gifs.splice(_.keys(subjects).indexOf(gif.subject), 1);
-      }
-    });
-  }, [subjects, gifs]);
 
   useEffect(() => {
     /* Local Server */
